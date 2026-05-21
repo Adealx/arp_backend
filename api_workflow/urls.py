@@ -5,7 +5,8 @@ from .views import (
     create_order,
     single_order,
     update_order,
-    delete_order
+    delete_order,
+    dashboard_stats
 )
 
 urlpatterns = [
@@ -19,5 +20,7 @@ urlpatterns = [
     path('update/<int:pk>/', update_order, name='update_order'),
 
     path('delete/<int:pk>/', delete_order, name='delete_order'),
+
+    path('dashboard/stats/', dashboard_stats),
 
 ]

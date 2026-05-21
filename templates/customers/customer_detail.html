@@ -1,0 +1,29 @@
+<h1>Customer Detail</h1>
+
+<p><strong>Name:</strong> {{ customer.name }}</p>
+
+<p><strong>Email:</strong> {{ customer.email }}</p>
+
+<p><strong>Phone:</strong> {{ customer.phone }}</p>
+
+<p><strong>Address:</strong> {{ customer.address }}</p>
+
+<p><strong>Company:</strong> {{ customer.company }}</p>
+
+<br><br>
+
+<a href="/customers/{{ customer.id }}/edit/">
+    Edit Customer
+</a>
+
+<br><br>
+
+<a href="/customers/{{ customer.id }}/delete/">
+    Delete Customer
+</a>
+
+<br><br>
+
+<a href="/customers/">
+    Back
+</a>
