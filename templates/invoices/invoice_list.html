@@ -1,0 +1,21 @@
+<h1>Invoices</h1>
+
+<a href="/invoices/add/">
+    Add Invoice
+</a>
+
+<ul>
+    {% for invoice in invoices %}
+        <li>
+            <a href="/invoices/{{ invoice.id }}/">
+                {{ invoice.invoice_number }}
+            </a>
+
+            - {{ invoice.customer.name }}
+
+            - ₦{{ invoice.amount }}
+
+            - {{ invoice.status }}
+        </li>
+    {% endfor %}
+</ul>

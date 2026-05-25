@@ -13,6 +13,8 @@ urlpatterns = [
 
     path('customers/', include('customers.urls')),
 
+    path('invoices/', include('invoices.urls')),
+
     path('api/', include('api_workflow.urls')),
 
     path('auth/', include('accounts.urls')),
