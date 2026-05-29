@@ -1,0 +1,33 @@
+<h1>Finance Dashboard</h1>
+
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+
+    <div style="padding: 15px; border: 1px solid #ccc;">
+        <h3>Total Revenue</h3>
+        <h2>₦{{ total_revenue }}</h2>
+    </div>
+
+    <div style="padding: 15px; border: 1px solid #ccc;">
+        <h3>Total Invoiced</h3>
+        <h2>₦{{ total_invoiced }}</h2>
+    </div>
+
+    <div style="padding: 15px; border: 1px solid #ccc;">
+        <h3>Outstanding</h3>
+        <h2>₦{{ outstanding }}</h2>
+    </div>
+
+    <div style="padding: 15px; border: 1px solid #ccc;">
+        <h3>Overdue Invoices</h3>
+        <h2>{{ overdue_invoices }}</h2>
+    </div>
+
+</div>
+
+<hr>
+
+<h3>Summary</h3>
+<ul>
+    <li>Total Invoices: {{ total_invoices }}</li>
+    <li>Total Payments: {{ total_payments }}</li>
+</ul> 

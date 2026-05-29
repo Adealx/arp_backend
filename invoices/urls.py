@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import dashboard
 
 urlpatterns = [
     path('', views.invoice_list, name='invoice_list'),
@@ -7,4 +8,5 @@ urlpatterns = [
     path('<int:pk>/', views.invoice_detail, name='invoice_detail'),
     path('<int:pk>/edit/', views.update_invoice, name='update_invoice'),
     path('<int:pk>/delete/', views.delete_invoice, name='delete_invoice'),
+    path('dashboard/', dashboard, name='dashboard'),
 ]

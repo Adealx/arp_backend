@@ -3,6 +3,7 @@ from invoices.models import Invoice
 
 
 class Payment(models.Model):
+
     invoice = models.ForeignKey(
         Invoice,
         on_delete=models.CASCADE,
@@ -14,21 +15,17 @@ class Payment(models.Model):
         decimal_places=2
     )
 
-    payment_date = models.DateField()
-
-    reference_number = models.CharField(
-        max_length=100,
-        unique=True
-    )
-
-    notes = models.TextField(
-        blank=True,
-        null=True
-    )
-
-    created_at = models.DateTimeField(
+    payment_date = models.DateField(
         auto_now_add=True
     )
 
+    def save(self, *args, **kwargs):
+
+        super().save(*args, **kwargs)
+
+        # IMPORTANT: refresh invoice status after payment
+        self.invoice.refresh_from_db()
+        self.invoice.update_status()
+
     def __str__(self):
-        return self.reference_number
+        return f"{self.invoice.invoice_number} - ₦{self.amount_paid}"
