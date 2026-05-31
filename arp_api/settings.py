@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import dj_database_url
 from decouple import config
 from pathlib import Path
+from urllib.parse import urlparse, urlencode, urlunparse, parse_qs
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -89,7 +90,10 @@ WSGI_APPLICATION = 'arp_api.wsgi.application'
 
 _database_url = config('DATABASE_URL', default=None)
 if _database_url:
-    DATABASES = {'default': dj_database_url.parse(_database_url, conn_max_age=600, ssl_require=True)}
+    _parsed = urlparse(_database_url)
+    _qs = {k: v for k, v in parse_qs(_parsed.query).items() if k != 'pgbouncer'}
+    _clean_url = urlunparse(_parsed._replace(query=urlencode(_qs, doseq=True)))
+    DATABASES = {'default': dj_database_url.parse(_clean_url, conn_max_age=600, ssl_require=True)}
 else:
     DATABASES = {
         'default': {
