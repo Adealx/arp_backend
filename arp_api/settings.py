@@ -93,7 +93,9 @@ if _database_url:
     _parsed = urlparse(_database_url)
     _qs = {k: v for k, v in parse_qs(_parsed.query).items() if k != 'pgbouncer'}
     _clean_url = urlunparse(_parsed._replace(query=urlencode(_qs, doseq=True)))
-    DATABASES = {'default': dj_database_url.parse(_clean_url, conn_max_age=600, ssl_require=True)}
+    _db_config = dj_database_url.parse(_clean_url, conn_max_age=0, ssl_require=True)
+    _db_config['DISABLE_SERVER_SIDE_CURSORS'] = True
+    DATABASES = {'default': _db_config}
 else:
     DATABASES = {
         'default': {
