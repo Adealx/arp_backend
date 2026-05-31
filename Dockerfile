@@ -15,8 +15,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN python manage.py collectstatic --no-input
+RUN chmod +x start.sh
 
 EXPOSE 8000
 
-CMD ["gunicorn", "arp_api.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "2"]
+CMD ["./start.sh"]
