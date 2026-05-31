@@ -8,14 +8,6 @@ services:
         generateValue: true
       - key: DEBUG
         value: "False"
-      - key: DB_NAME
+      - key: DATABASE_URL
         sync: false
-      - key: DB_USER
-        sync: false
-      - key: DB_PASSWORD
-        sync: false
-      - key: DB_HOST
-        sync: false
-      - key: DB_PORT
-        value: "5432"
     healthCheckPath: /api/
