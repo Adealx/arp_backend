@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from invoices.models import Invoice
 
 
@@ -19,11 +20,18 @@ class Payment(models.Model):
         auto_now_add=True
     )
 
+    created_by = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='payments',
+        null=True,
+        blank=True
+    )
+
     def save(self, *args, **kwargs):
 
         super().save(*args, **kwargs)
 
-        # IMPORTANT: refresh invoice status after payment
         self.invoice.refresh_from_db()
         self.invoice.update_status()
 

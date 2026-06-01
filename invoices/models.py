@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
+
 from customers.models import Customer
 from products.models import Product
 
@@ -36,6 +38,14 @@ class Invoice(models.Model):
         max_length=20,
         choices=STATUS_CHOICES,
         default='Pending'
+    )
+
+    created_by = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='invoices',
+        null=True,
+        blank=True
     )
 
     created_at = models.DateTimeField(
@@ -105,19 +115,15 @@ class InvoiceItem(models.Model):
 
     def save(self, *args, **kwargs):
 
-        # Calculate item total
         self.total_price = self.quantity * self.unit_price
 
-        # Save invoice item first
         super().save(*args, **kwargs)
 
-        # Recalculate invoice total
         total = sum(
             item.total_price
             for item in self.invoice.items.all()
         )
 
-        # Update invoice amount automatically
         self.invoice.amount = total
         self.invoice.save()
 
