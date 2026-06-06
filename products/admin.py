@@ -6,9 +6,13 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = [
         'sku',
         'name',
-        'retail_price',
-        'wholesale_price',
-        'stock_quantity',
+        'category',
+        'supplier',
+        'stock',
+        'reorder_level',
+        'unit_price',
+        'status',
+        'last_restocked',
         'created_at',
     ]
 
