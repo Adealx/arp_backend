@@ -1,18 +1,47 @@
 from django.contrib import admin
 from django.urls import path, include
 
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
 
-    path('accounts/', include('accounts.urls')),
+    path(
+        "admin/",
+        admin.site.urls
+    ),
 
-    path('api/', include('sales.urls')),
+    path(
+        "api/accounts/",
+        include("accounts.api_urls")
+    ),
 
-    path('customers/', include('customers.urls')),
+    path(
+        "api/customers/",
+        include("customers.api_urls")
+    ),
 
-    path('invoices/', include('invoices.urls')),
+    path(
+        "api/products/",
+        include("products.api_urls")
+    ),
 
-    path('payments/', include('payments.urls')),
+    path(
+        "api/invoices/",
+        include("invoices.api_urls")
+    ),
 
-    path('inventory/', include('products.urls')),
+    path(
+        "api/payments/",
+        include("payments.api_urls")
+    ),
+
+    path(
+        "api/orders/",
+        include("sales.api_urls")
+    ),
+
+    path(
+        "api/stock-movements/",
+        include("inventory.api_urls")
+    ),
+
 ]
