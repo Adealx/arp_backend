@@ -26,6 +26,14 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        # Clear all sales data before restructuring — there is no real production
+        # data here; the old schema is incompatible and rows cannot be migrated.
+        # CASCADE handles the old sales_salesorderitem rows automatically.
+        migrations.RunSQL(
+            "DELETE FROM sales_salesorder;",
+            reverse_sql=migrations.RunSQL.noop,
+        ),
+
         # Drop the old SalesOrderItem (wrong structure — product_name CharField, no line_total)
         migrations.DeleteModel(name='SalesOrderItem'),
 
@@ -47,12 +55,10 @@ class Migration(migrations.Migration):
             model_name='salesorder',
             name='customer',
             field=models.ForeignKey(
-                default=1,
                 on_delete=django.db.models.deletion.CASCADE,
                 related_name='sales_orders',
                 to='customers.customer',
             ),
-            preserve_default=False,
         ),
 
         # Fix total_amount to be non-nullable with default 0
