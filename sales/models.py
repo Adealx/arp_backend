@@ -6,6 +6,7 @@ class SalesOrder(models.Model):
 
     STATUS_CHOICES = [
         ('Pending', 'Pending'),
+        ('Approved', 'Approved'),
         ('Processing', 'Processing'),
         ('Completed', 'Completed'),
     ]

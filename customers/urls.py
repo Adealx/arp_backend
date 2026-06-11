@@ -1,10 +1,10 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import CustomerViewSet
+
+router = DefaultRouter()
+router.register(r'', CustomerViewSet, basename='customer')
 
 urlpatterns = [
-    path('', views.customer_list, name='customer_list'),
-    path('add/', views.add_customer, name='add_customer'),
-    path('<int:pk>/', views.customer_detail, name='customer_detail'),
-    path('<int:pk>/edit/', views.update_customer, name='update_customer'),
-    path('<int:pk>/delete/', views.delete_customer, name='delete_customer'),
+    path('', include(router.urls)),
 ]
