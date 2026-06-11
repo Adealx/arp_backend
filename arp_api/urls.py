@@ -44,4 +44,9 @@ urlpatterns = [
         include("inventory.api_urls")
     ),
 
+    path(
+        "api/dashboard/",
+        include("dashboard.urls")
+    ),
+
 ]
