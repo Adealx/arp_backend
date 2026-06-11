@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         # data here; the old schema is incompatible and rows cannot be migrated.
         # CASCADE handles the old sales_salesorderitem rows automatically.
         migrations.RunSQL(
-            "DELETE FROM sales_salesorder;",
+            "TRUNCATE TABLE sales_salesorder RESTART IDENTITY CASCADE;",
             reverse_sql=migrations.RunSQL.noop,
         ),
 
