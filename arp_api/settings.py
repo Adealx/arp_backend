@@ -51,6 +51,9 @@ INSTALLED_APPS = [
     'products',
     'sales',
     'dashboard',
+    'audit_logs',
+    'orders',
+    'inventory',
 ]
 
 MIDDLEWARE = [
@@ -88,26 +91,19 @@ WSGI_APPLICATION = 'arp_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-_database_url = config('DATABASE_URL', default=None)
-if _database_url:
-    _parsed = urlparse(_database_url)
-    _qs = {k: v for k, v in parse_qs(_parsed.query).items() if k != 'pgbouncer'}
-    _clean_url = urlunparse(_parsed._replace(query=urlencode(_qs, doseq=True)))
-    _db_config = dj_database_url.parse(_clean_url, conn_max_age=0, ssl_require=True)
-    _db_config['DISABLE_SERVER_SIDE_CURSORS'] = True
-    DATABASES = {'default': _db_config}
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('DB_NAME'),
-            'USER': config('DB_USER'),
-            'PASSWORD': config('DB_PASSWORD'),
-            'HOST': config('DB_HOST'),
-            'PORT': config('DB_PORT'),
-            'OPTIONS': {'sslmode': 'disable'},
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
+        'OPTIONS': {
+            'sslmode': 'disable',
+        },
     }
+}
 
 
 # Password validation

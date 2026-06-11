@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 class Customer(models.Model):
 
     STATUS_CHOICES = [
@@ -28,7 +27,7 @@ class Customer(models.Model):
     created_by = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='customers',
+        related_name="customers",
         null=True,
         blank=True
     )

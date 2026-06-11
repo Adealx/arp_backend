@@ -1,25 +1,47 @@
 from django.contrib import admin
 from django.urls import path, include
 
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
 
-    # Auth (login, register, me)
-    path('accounts/', include('accounts.urls')),
+    path(
+        "admin/",
+        admin.site.urls
+    ),
 
-    # Sales orders REST API
-    path('api/', include('sales.urls')),
+    path(
+        "api/accounts/",
+        include("accounts.api_urls")
+    ),
 
-    # Customers REST API
-    path('api/customers/', include('customers.urls')),
+    path(
+        "api/customers/",
+        include("customers.api_urls")
+    ),
 
-    # Inventory / Products REST API
-    path('inventory/', include('products.urls')),
+    path(
+        "api/products/",
+        include("products.api_urls")
+    ),
 
-    # Dashboard stats REST API
-    path('api/dashboard/', include('dashboard.urls')),
+    path(
+        "api/invoices/",
+        include("invoices.api_urls")
+    ),
 
-    # Invoices & payments (template views)
-    path('invoices/', include('invoices.urls')),
-    path('payments/', include('payments.urls')),
+    path(
+        "api/payments/",
+        include("payments.api_urls")
+    ),
+
+    path(
+        "api/orders/",
+        include("sales.api_urls")
+    ),
+
+    path(
+        "api/stock-movements/",
+        include("inventory.api_urls")
+    ),
+
 ]
